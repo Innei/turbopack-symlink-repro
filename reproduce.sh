@@ -13,9 +13,12 @@ echo "📂 Creating temporary build directory: $TEMP_DIR"
 rm -rf "$TEMP_DIR"
 mkdir -p "$TEMP_DIR"
 
-# Symlink node_modules from parent directory
-echo "🔗 Creating symlink for node_modules..."
-ln -s "$(pwd)/node_modules" "$TEMP_DIR/node_modules"
+# Symlink node_modules from parent directory using RELATIVE path
+# This is key - the symlink points "out" of the build directory
+echo "🔗 Creating symlink for node_modules (relative path)..."
+cd "$TEMP_DIR"
+ln -s ../../node_modules node_modules
+cd - > /dev/null
 
 # Copy necessary files
 echo "📋 Copying source files..."
