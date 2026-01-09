@@ -18,7 +18,33 @@ Error [TurbopackInternalError]: Symlink node_modules is invalid, it points out o
 
 ## Steps to Reproduce
 
-### Quick reproduction
+### Reproduce in a real project (lobe-chat)
+
+This issue occurs in complex projects like [lobe-chat](https://github.com/lobehub/lobe-chat). To reproduce:
+
+```bash
+# Clone lobe-chat
+git clone https://github.com/lobehub/lobe-chat.git
+cd lobe-chat
+pnpm install
+
+# Create isolated build directory with symlinks
+mkdir -p tmp/test-build
+cd tmp/test-build
+ln -s ../../node_modules node_modules
+ln -s ../../packages packages
+cp ../../package.json .
+cp ../../next.config.ts .
+cp ../../tsconfig.json .
+cp -r ../../src .
+
+# Run build - this will fail
+pnpm next build
+```
+
+### Minimal reproduction (may not trigger in simple projects)
+
+The issue seems to require complex project configurations to trigger. In simple Next.js projects, symlinked node_modules may work fine.
 
 ```bash
 chmod +x reproduce.sh
