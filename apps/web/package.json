@@ -1,0 +1,20 @@
+{
+  "name": "web",
+  "private": true,
+  "scripts": {
+    "dev": "next dev -p 4123",
+    "dev:webpack": "next dev --webpack -p 4123",
+    "build": "next build"
+  },
+  "dependencies": {
+    "@scope/ui": "workspace:*",
+    "next": "16.3.0",
+    "react": "19.2.0",
+    "react-dom": "19.2.0"
+  },
+  "devDependencies": {
+    "@types/react": "19.2.0",
+    "@types/react-dom": "19.2.0",
+    "typescript": "5.9.3"
+  }
+}
